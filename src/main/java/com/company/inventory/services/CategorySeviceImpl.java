@@ -137,4 +137,35 @@ public class CategorySeviceImpl implements ICategorySevice{
     }
 
 
+    @Override
+    @Transactional
+    public ResponseEntity<CategoryResponseRest> deleteById(Long id) {
+
+        CategoryResponseRest response = new CategoryResponseRest();
+
+        List<Category> list = new ArrayList<>();
+
+        try{
+            Optional<Category> categoryToBeDeleted = categoryDao.findById(id);
+
+            if (categoryToBeDeleted.isPresent()){
+                categoryDao.deleteById(id);
+                list.add(categoryToBeDeleted.get());
+                response.getCategoryResponse().setCategory(list);
+                response.setMetadata("Respuesta ok","00","Categoria eliminada");
+            }else{
+                response.setMetadata("Respuesta no ok","-1","Categoria no encontrada");
+                return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.NOT_FOUND);
+            }
+
+        }catch(Exception e){
+            response.setMetadata("Respuesta no ok","-1","Error al eliminar categoria");
+            e.getStackTrace();
+            return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.OK);
+    }
+
+
 }
