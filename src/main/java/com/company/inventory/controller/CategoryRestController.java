@@ -31,7 +31,7 @@ public class CategoryRestController {
     /**
      * get categories by id
      * @param id
-     * @return
+     * @return all categories
      */
     @GetMapping("/categories/{id}")
     public ResponseEntity<CategoryResponseRest> searchCategoriesById(@PathVariable Long id){
@@ -44,7 +44,7 @@ public class CategoryRestController {
     /**
      * save category
      * @param category
-     * @return
+     * @return the category created
      */
     @PostMapping("/categories")
     public ResponseEntity<CategoryResponseRest> save(@RequestBody Category category){
@@ -53,4 +53,19 @@ public class CategoryRestController {
 
         return response;
     }
+
+    /**
+     * update category
+     * @param category
+     * @param id
+     * @return the objet updated
+     */
+    @PutMapping("/categories/{id}")
+    public ResponseEntity<CategoryResponseRest> update(@RequestBody Category category, @PathVariable Long id){
+
+        ResponseEntity<CategoryResponseRest> response = service.update(category, id);
+
+        return response;
+    }
+
 }
