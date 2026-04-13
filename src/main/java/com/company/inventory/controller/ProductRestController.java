@@ -90,4 +90,34 @@ public class ProductRestController {
         ResponseEntity<ProductResponseRest> response = this.productService.search();
         return response;
     }
+
+    /**
+     * update product
+     * @param picture
+     * @param name
+     * @param price
+     * @param quantity
+     * @param categoryId
+     * @param id
+     * @return
+     * @throws IOException
+     */
+    @PutMapping("/products/{id}")
+    public ResponseEntity<ProductResponseRest> update(@RequestParam("picture")MultipartFile picture,
+                                                    @RequestParam("name")String name,
+                                                    @RequestParam("price") int price,
+                                                    @RequestParam("quantity") int quantity,
+                                                    @RequestParam("categoryId") Long categoryId,
+                                                    @PathVariable Long id
+    )throws IOException{
+        Product product = new Product();
+        product.setName(name);
+        product.setPrice(price);
+        product.setQuantity(quantity);
+        product.setPicture(Util.compressZLib(picture.getBytes()));
+
+        ResponseEntity<ProductResponseRest> response = productService.update(product,categoryId,id);
+        return response;
+    }
+
 }
