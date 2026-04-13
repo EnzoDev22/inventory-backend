@@ -80,4 +80,14 @@ public class ProductRestController {
         ResponseEntity<ProductResponseRest> response = this.productService.deleteById(id);
         return response;
     }
+
+    /**
+     * get all products
+     * @return
+     */
+    @GetMapping("/products")
+    public ResponseEntity<ProductResponseRest> getProducts(){
+        ResponseEntity<ProductResponseRest> response = this.productService.search();
+        return response;
+    }
 }
