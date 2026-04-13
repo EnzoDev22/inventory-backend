@@ -11,4 +11,6 @@ public interface IProductService {
     public ResponseEntity<ProductResponseRest> searchById(Long id);
 
     public ResponseEntity<ProductResponseRest> serarchByName(String name);
+
+    public ResponseEntity<ProductResponseRest> deleteById(Long id);
 }
