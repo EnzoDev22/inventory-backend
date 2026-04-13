@@ -21,7 +21,7 @@ public class ProductRestController {
 
 
     /**
-     *
+     * save product
      * @param picture
      * @param name
      * @param price
@@ -45,6 +45,17 @@ public class ProductRestController {
 
         ResponseEntity<ProductResponseRest> response = this.productService.save(product,categoryId);
 
+        return response;
+    }
+
+    /**
+     * search by Id
+     * @param id
+     * @return
+     */
+    @GetMapping("/products/{id}")
+    public ResponseEntity<ProductResponseRest> searchById(@PathVariable Long id){
+        ResponseEntity<ProductResponseRest> response = this.productService.searchById(id);
         return response;
     }
 
