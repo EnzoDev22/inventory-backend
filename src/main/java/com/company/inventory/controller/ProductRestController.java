@@ -59,4 +59,15 @@ public class ProductRestController {
         return response;
     }
 
+    /**
+     * search by Name
+     * @param name
+     * @return
+     */
+    @GetMapping("/products/filter/{name}")
+    public ResponseEntity<ProductResponseRest> searchByName(@PathVariable String name){
+        ResponseEntity<ProductResponseRest> response = this.productService.serarchByName(name);
+        return response;
+    }
+
 }
