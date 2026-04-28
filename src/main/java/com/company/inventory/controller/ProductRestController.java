@@ -1,9 +1,13 @@
 package com.company.inventory.controller;
 
 import com.company.inventory.model.Product;
+import com.company.inventory.response.CategoryResponseRest;
 import com.company.inventory.response.ProductResponseRest;
 import com.company.inventory.services.IProductService;
+import com.company.inventory.util.CategoryExcelExporter;
+import com.company.inventory.util.ProductExcelExporter;
 import com.company.inventory.util.Util;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -118,6 +122,25 @@ public class ProductRestController {
 
         ResponseEntity<ProductResponseRest> response = productService.update(product,categoryId,id);
         return response;
+    }
+
+    /**
+     * export products in excel file
+     * @param response
+     * @throws IOException
+     */
+    @GetMapping("/products/export/excel")
+    public void exportToExcel(HttpServletResponse response)throws IOException{
+        response.setContentType("application/octet-stream");
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=result_products.xlsx";
+        response.setHeader(headerKey, headerValue);
+
+        ResponseEntity<ProductResponseRest> productResponse = productService.search();
+        ProductExcelExporter excelExporter = new ProductExcelExporter(productResponse.getBody().getProductResponse().getProducts());
+
+        excelExporter.export(response);
     }
 
 }
