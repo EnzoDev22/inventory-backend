@@ -13,21 +13,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>inventory</name>
 	<description>Proyecto para control de inventario</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -69,8 +60,14 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>5.2.2</version>
 		</dependency>
+		<!-- Source: https://mvnrepository.com/artifact/com.google.cloud.sql/postgres-socket-factory -->
+		<dependency>
+			<groupId>com.google.cloud.sql</groupId>
+			<artifactId>postgres-socket-factory</artifactId>
+			<version>1.28.3</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -79,5 +76,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
